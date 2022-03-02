@@ -7,6 +7,8 @@ def create_app():
     app = Flask(__name__)
     api = Api(app)
 
+    api.add_resource(Object, '/object/<name>')
+
     return app
 
 if __name__ == '__main__':
