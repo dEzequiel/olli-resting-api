@@ -1,0 +1,14 @@
+from distutils.log import debug
+from flask import Flask
+from flask_restful import Resource, Api
+
+def create_app():
+
+    app = Flask(__name__)
+    api = Api(app)
+
+    return app
+
+if __name__ == '__main__':
+    app = create_app()
+    app.run(debug=True)
