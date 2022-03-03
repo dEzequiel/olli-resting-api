@@ -10,7 +10,26 @@ def test_get_object_from_db():
 
     services = Services()
     item = services.get_object("Elixir of the Mongoose")
-    
+
     expected_result = [{'name': 'Elixir of the Mongoose', 'quality': 7, 'sell_in': 5}]
 
     assert expected_result == item
+
+def test_get_objects_from_db():
+
+    inventory.clean_inventory_list()
+
+    normal_item = Normal_Item("Elixir of the Mongoose", 5, 7)
+    normal_item2 = Normal_Item("Elixir of the Mongoose", 1, 1)
+
+    inventory.new_item(normal_item)
+    inventory.new_item(normal_item2)
+
+    services = Services()
+    item = services.get_object("Elixir of the Mongoose")
+
+    expected_result = [{'name': 'Elixir of the Mongoose', 'quality': 7, 'sell_in': 5},
+                        {'name': 'Elixir of the Mongoose', 'quality': 1, 'sell_in': 1}]
+
+    assert expected_result == item
+    assert 2 == inventory.get_inventory_size()
