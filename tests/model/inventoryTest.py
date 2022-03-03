@@ -28,5 +28,6 @@ def test_get_object_by_name():
 
     assert 2 == len(inventory.inventoryItems)
     expected_result = [{'name': 'Elixir of the Mongoose', 'quality': 7, 'sell_in': 5}]
-    
+
     assert expected_result == inventory.get_item('Elixir of the Mongoose')
+    assert {"Harry":"not found"} == inventory.get_item("Harry")
