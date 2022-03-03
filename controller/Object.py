@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import Resource
-from model import inventory
-from service.service import Service
+from repository import inventory
+from service.get_object import Service
 
 
 class Object(Resource):
