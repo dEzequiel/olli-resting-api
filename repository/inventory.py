@@ -15,8 +15,12 @@ def get_item(name):
 
     return inventoryDemandItems
 
+def get_inventory():
+    return inventoryItems
+
 def get_inventory_size():
     return len(inventoryItems)
 
 def clean_inventory_list():
     inventoryItems.clear()
+    inventoryDemandItems.clear()
