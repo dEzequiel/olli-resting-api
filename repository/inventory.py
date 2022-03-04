@@ -3,8 +3,12 @@ class Inventory:
     inventory_items = [
         {'name': 'Elixir of the Mongoose', 'sell_in': 5, 'quality': 7},
         {'name': 'Elixir of the Mongoose', 'sell_in': 1, 'quality': 1},
-        {'name': 'Sulfuras', 'sell_in': 1, 'quality': 1}
-
+        {'name': 'Sulfuras', 'sell_in': 1, 'quality': 1},
+        {'name': "+5 Dexterity Vest", 'sell_in':10, 'quality':20},
+        {'name': "Aged Brie",'sell_in': 2, 'quality': 0},
+        {'name': "Backstage passes to a TAFKAL80ETC concert", 'sell_in': 15, 'quality': 20},
+        {'name': "Backstage passes to a TAFKAL80ETC concert", 'sell_in': 10, 'quality': 49},
+        {'name': "Backstage passes to a TAFKAL80ETC concert", 'sell_in': 5, 'quality': 49}
         ]
 
     @classmethod
