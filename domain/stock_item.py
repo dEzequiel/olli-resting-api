@@ -1,7 +1,7 @@
 from domain.item import Item
 
-class Stock_Item(Item):
 
+class Stock_Item(Item):
     def get_sell_in(self):
         return self.sell_in
 

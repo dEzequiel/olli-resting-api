@@ -1,6 +1,7 @@
 from domain.normal_item import Normal_Item
 import pytest
 
+
 def test_check_item_type_object():
 
     normal_item = Normal_Item("Elixir of the Mongoose", 5, 7)

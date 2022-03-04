@@ -1,7 +1,7 @@
 from domain.stock_item import Stock_Item
 
-class Normal_Item(Stock_Item):
 
+class Normal_Item(Stock_Item):
     def update_quality(self):
 
         if self.get_sell_in() <= 0:
