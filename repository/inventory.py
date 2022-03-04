@@ -1,7 +1,10 @@
 class Inventory:
 
     inventory_items = [
-        {'name': 'Elixir of the Mongoose', 'sell_in': 5, 'quality': 7}
+        {'name': 'Elixir of the Mongoose', 'sell_in': 5, 'quality': 7},
+        {'name': 'Elixir of the Mongoose', 'sell_in': 1, 'quality': 1},
+        {'name': 'Sulfuras', 'sell_in': 1, 'quality': 1}
+
         ]
 
     @classmethod
