@@ -1,26 +1,33 @@
 from domain.stock_item import Stock_Item
 
-inventoryItems = []
-inventoryDemandItems = []
+class Inventory:
 
-def new_item(item):
-    inventoryItems.append(item.__dict__)
+    inventoryItems = []
+    inventoryDemandItems = []
 
-def get_item(name):
-    for item in inventoryItems:
-        if item['name'] == name:
-            inventoryDemandItems.append(item)
-        else:
-            return {name:"not found"}
+    @classmethod
+    def new_item(cls, item):
+        cls.inventoryItems.append(item.__dict__)
 
-    return inventoryDemandItems
+    @classmethod
+    def get_item(cls, name):
+        for item in cls.inventoryItems:
+            if item['name'] == name:
+                cls.inventoryDemandItems.append(item)
+            else:
+                return {name:"not found"}
 
-def get_inventory():
-    return inventoryItems
+        return cls.inventoryDemandItems
 
-def get_inventory_size():
-    return len(inventoryItems)
+    @classmethod
+    def get_inventory(cls):
+        return cls.inventoryItems
 
-def clean_inventory_list():
-    inventoryItems.clear()
-    inventoryDemandItems.clear()
+    @classmethod
+    def get_inventory_size(cls):
+        return len(cls.inventoryItems)
+
+    @classmethod
+    def clean_inventory_list(cls):
+        cls.inventoryItems.clear()
+        cls.inventoryDemandItems.clear()
