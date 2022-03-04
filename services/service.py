@@ -1,6 +1,9 @@
-from repository import inventory
+from socket import inet_ntoa
+from repository.inventory import Inventory
 
 class Services():
 
-    def get_object(self, name):
-        return inventory.get_item(name)
+    @staticmethod
+    def get_object(name):
+        item = Inventory.get_item(name)
+        return item
