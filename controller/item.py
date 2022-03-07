@@ -4,4 +4,4 @@ from services.service import Services
 
 class Item(Resource):
     def get(self, name):
-        return Services.get_object(name), 200
+        return Services.get_item(name), 200
