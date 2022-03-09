@@ -1,7 +1,9 @@
 from socket import inet_ntoa
 from repository.get_all_items import get_all_items
 from repository.get_item import get_item
-# from repository.get_by_sell_in import get_by_sell_in
+from repository.get_item_by_sell_in import get_item_by_sell_in
+from repository.get_item_by_quality import get_item_by_quality
+
 
 class Services:
     @staticmethod
@@ -12,6 +14,10 @@ class Services:
     def get_item(name):
         return get_item(name)
 
-    # @staticmethod
-    # def get_item_by_sell_in(sell_in):
-    #     return get_by_sell_in(sell_in)
+    @staticmethod
+    def get_item_by_sell_in(sellin):
+        return get_item_by_sell_in(sellin)
+
+    @staticmethod
+    def get_item_by_quality(quality):
+        return get_item_by_quality(quality)

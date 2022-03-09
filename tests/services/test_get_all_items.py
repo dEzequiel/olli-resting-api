@@ -5,6 +5,7 @@ import pytest
 
 services = Services()
 
+
 def test_get_all_items():
     with app.app_context():
 
