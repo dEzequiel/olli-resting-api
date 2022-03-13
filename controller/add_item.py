@@ -5,4 +5,4 @@ from services.service import Services
 class AddItem(Resource):
     def post(self, name):
         Services.add_new_item(name)
-        return "Item added", 201
+        return {"Item":"added"}, 201
