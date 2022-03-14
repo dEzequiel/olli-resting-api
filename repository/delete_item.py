@@ -14,9 +14,10 @@ def delete_item(id):
         )
     ]
 
-    database.execute(f"DELETE FROM inventory WHERE id='{id}'")
-    database.commit()
-    database.close()
-
-    # The returned item is the deleted one
-    return item
+    if len(item) != 0:
+        database.execute(f"DELETE FROM inventory WHERE id='{id}'")
+        database.commit()
+        database.close()
+        return f"Item with id={id} was deleted"
+    else:
+        return f"Item with id={id} was not found"
