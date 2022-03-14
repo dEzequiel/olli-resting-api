@@ -19,7 +19,6 @@ api.add_resource(Items, "/items")
 api.add_resource(Item, "/item/name/<name>")
 api.add_resource(ItemsBySellin, "/items/sellin/<sellin>")
 api.add_resource(ItemsByQuality, "/items/quality/<quality>")
-api.add_resource(AddItem, "/item/add/<name>")
 
 if __name__ == "__main__":
     app.run(debug=True)

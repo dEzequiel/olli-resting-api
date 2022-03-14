@@ -10,7 +10,7 @@ def test_get_all_items():
         expected_result = [
             {"id":1, "name": "Sulfuras", "sell_in": 1, "quality": 1},
             {"id":2,"name": "Elixir of the Mongoose", "sell_in": 7, "quality": 5},
-            {"id":3,"name": "Elixir of the Mongoose", "sell_in": 1, "quality": 1},
+            # {"id":3,"name": "Elixir of the Mongoose", "sell_in": 1, "quality": 1},
         ]
 
         assert expected_result == get_all_items()

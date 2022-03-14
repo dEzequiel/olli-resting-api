@@ -1,13 +1,13 @@
 from repository.database import get_db
 
 
-def add_item(name, sell_in, quality):
+def add_item(id, name, sell_in, quality):
     database = get_db()
 
     item = [
         dict(row)
         for row in database.execute(
-            "INSERT INTO inventory VALUES (?, ?, ?)", (name, sell_in, quality)
+            "INSERT INTO inventory VALUES (?, ?, ?, ?)", (None, name, sell_in, quality)
         )
     ]
 
