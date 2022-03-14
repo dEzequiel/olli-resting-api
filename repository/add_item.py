@@ -6,4 +6,5 @@ def add_item(name, sell_in, quality):
     item = [dict(row) for row in database.execute("INSERT INTO inventory VALUES (?, ?, ?)", (name, sell_in, quality))]
 
     database.commit()
+    database.close()
     return item
