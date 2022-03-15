@@ -24,5 +24,5 @@ class Services:
         return get_item_by_quality(quality)
 
     @staticmethod
-    def add_new_item(name):
-        add_item(name)
+    def post_item(name):
+        add_item(name, sell_in=10, quality=10)
