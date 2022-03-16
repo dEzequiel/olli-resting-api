@@ -7,12 +7,18 @@ from controller.items import Items
 from controller.items_by_quality import ItemsByQuality
 from controller.root import Root
 from controller.items_by_sell_in import ItemsBySellin
-
+from repository.commands import database_command
 
 app = Flask(__name__)
 
 # API REST
 api = Api(app, catch_all_404s=True)
+
+# Flask Blueprints encapsulate functionality, such as views, templates, and other resources.
+# A blueprint is a template for generating a "section" of a web application.
+app.register_blueprint(database_command)
+
+
 
 api.add_resource(Root, "/")
 api.add_resource(Items, "/items")
