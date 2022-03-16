@@ -23,5 +23,5 @@ ENTRYPOINT flask run --host=0.0.0.0 --port=5000
 # This instruction will start the container with a Bash session
 # docker run --name olli --rm -i -t ollivanders:latest bash
 
-# With the container running, inside another CLI session you cant access the container bash via:
+# With the container running, inside another CLI session you can access the container bash via:
 # docker exec -it olli bash
