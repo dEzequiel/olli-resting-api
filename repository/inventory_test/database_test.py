@@ -10,7 +10,7 @@ def get_db():
 
 
 def close_connection(exception):
-    db = getattr(g, "_database", None)
+    db = get_db()
     if db is not None:
         db.close()
 
