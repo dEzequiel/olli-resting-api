@@ -22,7 +22,7 @@ INSERT INTO inventory
 (name, sell_in, quality)
 VALUES ('Backstage passes to a TAFKAL80ETC concert', 15, 20);
 
-INSERT INTO inventory
+INSERT INTO inventory   
 (name, sell_in, quality)
 VALUES ('Backstage passes to a TAFKAL80ETC concert', 10, 49);
 

@@ -1,15 +1,18 @@
 import pytest
 from app import app as f
 
+
 @pytest.fixture()
 def app():
-    f.config.update({
-        "TESTING": True,
-    })
+    f.config.update(
+        {
+            "TESTING": True,
+        }
+    )
 
     # other setup can go here
 
-    yield f # no sobrecarga memoria, se comparte la misma instancia en todos los tests
+    yield f  # no sobrecarga memoria, se comparte la misma instancia en todos los tests
 
     # clean up / reset resources here
 

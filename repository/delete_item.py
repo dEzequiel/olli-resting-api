@@ -1,5 +1,6 @@
 from repository.database import get_db
 
+
 def delete_item(id):
 
     database = get_db()
@@ -9,9 +10,7 @@ def delete_item(id):
 
     item = [
         dict(row)
-        for row in database.execute(
-            f"SELECT * FROM inventory WHERE id='{id}'"
-        )
+        for row in database.execute(f"SELECT * FROM inventory WHERE id='{id}'")
     ]
 
     if len(item) != 0:
