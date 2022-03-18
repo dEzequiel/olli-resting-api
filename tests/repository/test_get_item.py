@@ -26,14 +26,28 @@ def test_get_one_item(client, app):
     assert response.status_code == 200
 
 
-def test_get_multiple_item():
-    with app.app_context():
-        expected_result = [
-            {"id": 2, "name": "Elixir of the Mongoose", "sell_in": 7, "quality": 5},
-            {"id": 3, "name": "Elixir of the Mongoose", "sell_in": 1, "quality": 1},
-        ]
-        assert expected_result == get_item("Elixir of the Mongoose")
+def test_get_multiple_item(client, app):
 
+    #[{"id": 4, "name": "Sulfuras, Hand of Ragnaros", "sell_in": 0, "quality": 80},
+    # {"id": 5, "name": "Sulfuras, Hand of Ragnaros", "sell_in": -1, "quality": 80}]
+    with app.app_context():
+        init_db()
+        insert_db()
+
+    response = client.get("/item/name/Sulfuras, Hand of Ragnaros")
+    data = json.loads(response.get_data(as_text=True))
+
+    assert data[0]['id'] == 4
+    assert data[0]['name'] == 'Sulfuras, Hand of Ragnaros'
+    assert data[0]['sell_in'] == 0
+    assert data[0]['quality'] == 80
+
+    assert data[1]['id'] == 5
+    assert data[1]['name'] == 'Sulfuras, Hand of Ragnaros'
+    assert data[1]['sell_in'] == -1
+    assert data[1]['quality'] == 80
+
+    assert response.status_code == 200
 
 def test_no_item():
     with app.app_context():
