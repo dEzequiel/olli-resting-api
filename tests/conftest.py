@@ -1,18 +1,20 @@
 import pytest
-from app import app as f
+from app import create_app
 
+
+#The tests will look for fixture in the same file. As the fixture is not found in the file, it will check for fixture in conftest.py file.
+#On finding it, the fixture method is invoked and the result is returned to the input argument of the test
 
 @pytest.fixture()
 def app():
-    f.config.update(
-        {
-            "TESTING": True,
-        }
-    )
+    app = create_app()
+    app.config.update({
+        "TESTING": True,
+    })
 
     # other setup can go here
 
-    yield f  # no sobrecarga memoria, se comparte la misma instancia en todos los tests
+    yield app
 
     # clean up / reset resources here
 
