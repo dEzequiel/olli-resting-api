@@ -1,13 +1,20 @@
+import json
 import pytest
 from repository.get_all_items import get_all_items
+from repository.commands import init_db, insert_db
 
 
 # WARNING: this test can fail if the db is modified with a new record.
 
 
-def test_get_all_items(client):
-    with client.application.app_context:
-        expected_result = [
+
+def test_get_all_items(client, app):
+
+    with app.app_context():
+        init_db()
+        insert_db()
+
+    expected_result = [
             {"id": 1, "name": "Aged Brie", "sell_in": 2, "quality": 0},
             {"id": 2, "name": "+5 Dexterity Vest", "sell_in": 10, "quality": 20},
             {"id": 3, "name": "Elixir of the Mongoose", "sell_in": 5, "quality": 7},
@@ -44,4 +51,19 @@ def test_get_all_items(client):
             {"id": 9, "name": "Conjured Mana Cake", "sell_in": 3, "quality": 6},
         ]
 
-    assert expected_result == get_all_items()
+    # Convert into json response data, returned as text
+    response = client.get("/items")
+    data = json.loads(response.get_data(as_text=True))
+
+    assert expected_result == data
+    assert response.status_code == 200
+
+
+def test_no_items(client, app):
+
+    with app.app_context():
+        init_db()
+
+    response = client.get("/items")
+    data = json.loads(response.get_data(as_text=True))
+    assert {"Inventory":"is empty"} == data
