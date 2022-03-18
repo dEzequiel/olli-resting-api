@@ -1,12 +1,29 @@
 import pytest
+import json
 from repository.get_item import get_item
-from app import app
+from repository.commands import init_db, insert_db
 
 
-def test_get_one_item():
+def test_get_one_item(client, app):
+
     with app.app_context():
-        expected_result = [{"id": 1, "name": "Sulfuras", "sell_in": 1, "quality": 1}]
-        assert expected_result == get_item("Sulfuras")
+        init_db()
+        insert_db()
+
+     # [{"id": 1, "name": "Aged Brie", "sell_in": 2, "quality": 0}]
+
+    response = client.get("/item/name/Aged Brie")
+    data = json.loads(response.get_data(as_text=True))
+
+    # This way because data returns a list of dicts. Always
+    # entire program returns a list of dicts
+
+    assert data[0]['id'] == 1
+    assert data[0]['name'] == 'Aged Brie'
+    assert data[0]['sell_in'] == 2
+    assert data[0]['quality'] == 0
+
+    assert response.status_code == 200
 
 
 def test_get_multiple_item():
