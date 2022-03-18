@@ -28,8 +28,6 @@ def test_get_one_item(client, app):
 
 def test_get_multiple_item(client, app):
 
-    #[{"id": 4, "name": "Sulfuras, Hand of Ragnaros", "sell_in": 0, "quality": 80},
-    # {"id": 5, "name": "Sulfuras, Hand of Ragnaros", "sell_in": -1, "quality": 80}]
     with app.app_context():
         init_db()
         insert_db()
@@ -49,7 +47,8 @@ def test_get_multiple_item(client, app):
 
     assert response.status_code == 200
 
-def test_no_item():
-    with app.app_context():
-        expected_result = {"Elixir": "not found"}
-        assert expected_result == get_item("Elixir")
+def test_no_item(client):
+    response = client.get("/item/name/Elixir")
+    data = json.loads(response.get_data(as_text=True))
+
+    assert {"Elixir":"not found"} == data
