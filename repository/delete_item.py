@@ -8,15 +8,13 @@ def delete_item(id):
     # Getting element just for testing purpose, also useful
     # to know which element was delete
 
-    item = [
-        dict(row)
-        for row in database.execute(f"SELECT * FROM inventory WHERE id='{id}'")
-    ]
+    item = [row for row in database.execute(f"SELECT * FROM inventory_test WHERE id='{id}'")]
 
-    if len(item) != 0:
-        database.execute(f"DELETE FROM inventory WHERE id='{id}'")
-        database.commit()
-        database.close()
-        return f"Item with id={id} was deleted"
-    else:
+    if len(item) == 0:
         return f"Item with id={id} was not found"
+
+    database.execute(f"DELETE FROM inventory_test WHERE id='{id}'")
+    database.commit()
+    database.close()
+
+    return f"Item with id={id} was deleted"
