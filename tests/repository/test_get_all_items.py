@@ -1,55 +1,20 @@
 import json
 import pytest
 from repository.get_all_items import get_all_items
-from repository.commands import init_db, insert_db
+from repository.inventory_test.database_test import init_db, insert_db
 
 
 # WARNING: this test can fail if the db is modified with a new record.
 
 
-
 def test_get_all_items(client, app):
 
-    with app.app_context():
-        init_db()
-        insert_db()
+    # This test uses production database!
+    # Why? never gonna fail if one item is posted or deleted from the db via requests,
+    # because response should be equal to the existing fields in db.
 
-    expected_result = [
-            {"id": 1, "name": "Aged Brie", "sell_in": 2, "quality": 0},
-            {"id": 2, "name": "+5 Dexterity Vest", "sell_in": 10, "quality": 20},
-            {"id": 3, "name": "Elixir of the Mongoose", "sell_in": 5, "quality": 7},
-            {
-                "id": 4,
-                "name": "Sulfuras, Hand of Ragnaros",
-                "sell_in": 0,
-                "quality": 80,
-            },
-            {
-                "id": 5,
-                "name": "Sulfuras, Hand of Ragnaros",
-                "sell_in": -1,
-                "quality": 80,
-            },
-            {
-                "id": 6,
-                "name": "Backstage passes to a TAFKAL80ETC concert",
-                "sell_in": 15,
-                "quality": 20,
-            },
-            {
-                "id": 7,
-                "name": "Backstage passes to a TAFKAL80ETC concert",
-                "sell_in": 10,
-                "quality": 49,
-            },
-            {
-                "id": 8,
-                "name": "Backstage passes to a TAFKAL80ETC concert",
-                "sell_in": 5,
-                "quality": 49,
-            },
-            {"id": 9, "name": "Conjured Mana Cake", "sell_in": 3, "quality": 6},
-        ]
+    with app.app_context():
+        expected_result = get_all_items()
 
     # Convert into json response data, returned as text
     response = client.get("/items")
@@ -61,9 +26,11 @@ def test_get_all_items(client, app):
 
 def test_no_items(client, app):
 
+    # This test uses testing database. Just for initialization.
+
     with app.app_context():
         init_db()
 
     response = client.get("/items")
     data = json.loads(response.get_data(as_text=True))
-    assert {"Inventory":"is empty"} == data
+    assert {"Inventory": "is empty"} == data
