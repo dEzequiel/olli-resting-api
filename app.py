@@ -4,7 +4,6 @@ from flask import Flask
 from flask_restful import Resource, Api
 from controller.add_item import AddItem
 from controller.item import Item
-from controller.item_management import ItemManagement
 from controller.inventory import Inventory
 from controller.items_by_quality import ItemsByQuality
 from controller.root import Root
@@ -32,7 +31,6 @@ def create_app():
     api.add_resource(ItemsBySellin, "/item/sellin/<sellin>")
     api.add_resource(ItemsByQuality, "/item/quality/<quality>")
 
-    api.add_resource(ItemManagement, "/item/del/<item_id>")
 
     return app
 
