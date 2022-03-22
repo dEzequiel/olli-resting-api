@@ -4,6 +4,7 @@ from repository.get_item import get_item
 from repository.get_item_by_sell_in import get_item_by_sell_in
 from repository.get_item_by_quality import get_item_by_quality
 from repository.add_item import add_item
+from repository.delete_item import delete_item
 
 
 class Services:
@@ -26,3 +27,7 @@ class Services:
     @staticmethod
     def post_item(name):
         add_item(name, sell_in=10, quality=10)
+
+    @staticmethod
+    def delete_item(item_id):
+        return delete_item(item_id)
