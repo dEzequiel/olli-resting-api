@@ -28,5 +28,5 @@ class Services:
     #     add_item(name, sell_in=10, quality=10)
 
     @staticmethod
-    def delete_item(item_id):
-        return delete_item(item_id)
+    def delete_item(name):
+        return delete_item(name)
