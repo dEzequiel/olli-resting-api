@@ -70,17 +70,14 @@ def delete_item(id):
 
     database = get_db()
 
-    # Getting element just for testing purpose, also useful
-    # to know which element was delete
 
-
-    if database.execute(f"SELECT * FROM inventory_test WHERE id='{id}'").fetchone():
-        database.execute(f"DELETE FROM inventory_test WHERE id='{id}'")
+    if database.execute(f"SELECT * FROM inventory WHERE id='{id}'").fetchone():
+        database.execute(f"DELETE FROM inventory WHERE id='{id}'")
         database.commit()
         database.close()
-        return {f"ID {id}":"deleted"}
+        return True #{f"ID {id}":"deleted"}
     else:
-        return {f"ID {id}":"not found"}
+        return False # {f"ID {id}":"not found"}
 
 
 

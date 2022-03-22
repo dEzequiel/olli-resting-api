@@ -26,11 +26,11 @@ def test_delete_item(client, app):
     response = client.delete("/item/del/3")
     assert response.status_code == 200
 
-# def test_delete_no_found_item(client, app):
-#     with app.app_context():
-#         init_db()
-#         insert_db()
+def test_delete_no_found_item(client, app):
+    with app.app_context():
+        init_db()
+        insert_db()
 
-#     response = client.delete("/item/del/100")
+    response = client.delete("/item/del/100")
 
-#     assert response.status_code == 404
+    assert response.status_code == 404
