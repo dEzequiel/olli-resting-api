@@ -13,7 +13,7 @@ def test_get_one_item(client, app):
 
     # [{"id": 1, "name": "Aged Brie", "sell_in": 2, "quality": 0}]
 
-    response = client.get("/item/name/Aged Brie")
+    response = client.get("/item/identifier/Aged Brie")
     data = json.loads(response.get_data(as_text=True))
 
     # This way because data returns a list of dicts. Always
@@ -35,7 +35,7 @@ def test_get_multiple_item(client, app):
         init_db()
         insert_db()
 
-    response = client.get("/item/name/Sulfuras, Hand of Ragnaros")
+    response = client.get("/item/identifier/Sulfuras, Hand of Ragnaros")
     data = json.loads(response.get_data(as_text=True))
 
     assert data[0]["id"] == 4
@@ -52,7 +52,7 @@ def test_get_multiple_item(client, app):
 
 
 def test_no_item(client):
-    response = client.get("/item/name/Elixir")
+    response = client.get("/item/identifier/Elixir")
     data = json.loads(response.get_data(as_text=True))
 
     assert {"Elixir": "not found"} == data

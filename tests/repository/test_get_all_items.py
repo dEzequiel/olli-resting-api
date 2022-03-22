@@ -1,7 +1,7 @@
 import json
 import pytest
 from repository.get_all_items import get_all_items
-from repository.inventory_test.database_test import init_db, insert_db
+from repository.commands import init_db, insert_db
 
 
 # WARNING: this test can fail if the db is modified with a new record.
@@ -17,7 +17,7 @@ def test_get_all_items(client, app):
         expected_result = get_all_items()
 
     # Convert into json response data, returned as text
-    response = client.get("/items")
+    response = client.get("/inventory")
     data = json.loads(response.get_data(as_text=True))
 
     assert expected_result == data
@@ -31,6 +31,6 @@ def test_no_items(client, app):
     with app.app_context():
         init_db()
 
-    response = client.get("/items")
+    response = client.get("/inventory")
     data = json.loads(response.get_data(as_text=True))
     assert {"Inventory": "is empty"} == data

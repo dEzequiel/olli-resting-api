@@ -1,15 +1,14 @@
-from socket import inet_ntoa
 from repository.get_all_items import get_all_items
 from repository.get_item import get_item
-from repository.get_item_by_sell_in import get_item_by_sell_in
-from repository.get_item_by_quality import get_item_by_quality
+from repository.group_items_by_sell_in import group_items_by_sell_in
+from repository.group_items_by_quality import group_items_by_quality
 from repository.add_item import add_item
 from repository.delete_item import delete_item
 
 
 class Services:
     @staticmethod
-    def get_items():
+    def get_all_items():
         return get_all_items()
 
     @staticmethod
@@ -17,16 +16,16 @@ class Services:
         return get_item(name)
 
     @staticmethod
-    def get_item_by_sell_in(sellin):
-        return get_item_by_sell_in(sellin)
+    def group_items_by_sell_in(sellin):
+        return group_items_by_sell_in(sellin)
 
     @staticmethod
-    def get_item_by_quality(quality):
-        return get_item_by_quality(quality)
+    def group_items_by_quality(quality):
+        return group_items_by_quality(quality)
 
-    @staticmethod
-    def post_item(name):
-        add_item(name, sell_in=10, quality=10)
+    # @staticmethod
+    # def post_item(name):
+    #     add_item(name, sell_in=10, quality=10)
 
     @staticmethod
     def delete_item(item_id):
