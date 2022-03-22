@@ -26,10 +26,10 @@ def test_delete_item(client, app):
         commands.init_db()
         commands.insert_db()
 
-    response = client.delete("/item/del/3")
+    response = client.delete("/item/identifier/Aged Brie")
     data = json.loads(response.get_data(as_text=True))
 
-    assert {"ID 3": "deleted"} == data
+    assert {"Aged Brie": "deleted"} == data
     assert response.status_code == 200
 
 def test_delete_no_found_item(client, app):
@@ -37,8 +37,8 @@ def test_delete_no_found_item(client, app):
         commands.init_db()
         commands.insert_db()
 
-    response = client.delete("/item/del/100")
+    response = client.delete("/item/identifier/Conjure")
     data = json.loads(response.get_data(as_text=True))
 
-    assert {"ID 100": "not found"} == data
+    assert {"Conjure": "not found"} == data
     assert response.status_code == 404
