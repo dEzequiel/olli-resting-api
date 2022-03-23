@@ -7,6 +7,8 @@ DATABASE = "repository/inventory.db"
 
 def get_db():
     db = sqlite3.connect(DATABASE)
+    db.row_factory = sqlite3.Row
+
     return db
 
 
@@ -51,7 +53,7 @@ def insert_db_command():
 # Methods that interacts with the database. The ones used in tests/ and
 # replicates the one used by original database.
 
-def add_item(id, name, sell_in, quality):
+def add_item(name, sell_in, quality):
     database = get_db()
 
     item = [
@@ -78,18 +80,6 @@ def delete_item(id):
         return True #{f"ID {id}":"deleted"}
     else:
         return False # {f"ID {id}":"not found"}
-
-
-
-
-
-
-
-
-
-
-
-
 
 def get_all_items():
     database = get_db()
