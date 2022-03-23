@@ -1,23 +1,15 @@
-from dataclasses import dataclass
 import pytest
-from app import app
-from repository.database import get_db
-from repository.add_item import add_item
+import json
+from repository.inventory_test.database_test import add_item, get_item
+from repository.inventory_test.database_test import init_db, insert_db
 
+def test_add_item(app):
 
-def test_add_new_item():
+    # This test uses test database!
+
     with app.app_context():
-        add_item(None, "Elixir of the Mongoose", 12, 12)
+        init_db()
+        insert_db()
 
-        database = get_db()
-        item = [
-            dict(row)
-            for row in database.execute(
-                "SELECT * FROM inventory ORDER BY quality DESC LIMIT 1;"
-            )
-        ]
-
-        expected_result = [
-            {"id": 21, "name": "Elixir of the Mongoose", "sell_in": 12, "quality": 12}
-        ]
-        assert item == expected_result
+        add_item("Prueba", 1, 1)
+        assert [{'id': 10, 'name':'Prueba', 'sell_in':1, 'quality':1}] == get_item("Prueba")
