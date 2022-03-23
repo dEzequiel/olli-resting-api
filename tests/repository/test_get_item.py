@@ -1,7 +1,12 @@
 import pytest
 import json
 from repository.commands import init_db, insert_db
+from repository.inventory_test.database_test import get_item
 
+def test_unit_get_item():
+    
+    assert [{"id":1, "name":"Aged Brie", "sell_in":2, "quality":0}] == get_item("Aged Brie")
+    assert {"Calamar":"not found"} == get_item("Calamar")
 
 def test_get_one_item(client, app):
 
