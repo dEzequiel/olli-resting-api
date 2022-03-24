@@ -25,6 +25,7 @@ def test_get_items_by_sell_in(client, app):
 
     assert response.status_code == 200
 
+
 def test_no_items_with_sell_in_found(client, app):
     with app.app_context():
         init_db()

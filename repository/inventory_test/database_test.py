@@ -53,13 +53,15 @@ def insert_db_command():
 # Methods that interacts with the database. The ones used in tests/ and
 # replicates the one used by original database.
 
+
 def add_item(name, sell_in, quality):
     database = get_db()
 
     item = [
         dict(row)
         for row in database.execute(
-            "INSERT INTO inventory_test VALUES (?, ?, ?, ?)", (None, name, sell_in, quality)
+            "INSERT INTO inventory_test VALUES (?, ?, ?, ?)",
+            (None, name, sell_in, quality),
         )
     ]
 
@@ -72,14 +74,14 @@ def delete_item(id):
 
     database = get_db()
 
-
     if database.execute(f"SELECT * FROM inventory WHERE id='{id}'").fetchone():
         database.execute(f"DELETE FROM inventory WHERE id='{id}'")
         database.commit()
         database.close()
-        return True #{f"ID {id}":"deleted"}
+        return True  # {f"ID {id}":"deleted"}
     else:
-        return False # {f"ID {id}":"not found"}
+        return False  # {f"ID {id}":"not found"}
+
 
 def get_all_items():
     database = get_db()
@@ -105,7 +107,9 @@ def get_item_by_sell_in(sellin):
     database = get_db()
     item = [
         dict(row)
-        for row in database.execute(f"SELECT * FROM inventory_test WHERE sell_in='{sellin}'")
+        for row in database.execute(
+            f"SELECT * FROM inventory_test WHERE sell_in='{sellin}'"
+        )
     ]
     database.close()
     return item if len(item) != 0 else {f"Sell in {sellin}": "not found"}

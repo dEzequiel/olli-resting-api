@@ -2,7 +2,6 @@ from crypt import methods
 import sqlite3
 from flask import Flask
 from flask_restful import Resource, Api
-from controller.add_item import AddItem
 from controller.item import Item
 from controller.inventory import Inventory
 from controller.items_by_quality import ItemsByQuality
@@ -10,6 +9,7 @@ from controller.root import Root
 from controller.items_by_sell_in import ItemsBySellin
 from repository.commands import database_command
 from repository.inventory_test.database_test import database_test_command
+
 
 def create_app():
     app = Flask(__name__)
@@ -22,7 +22,6 @@ def create_app():
     app.register_blueprint(database_command)
     app.register_blueprint(database_test_command)
 
-
     api.add_resource(Root, "/")
 
     api.add_resource(Inventory, "/inventory")
@@ -31,8 +30,8 @@ def create_app():
     api.add_resource(ItemsBySellin, "/item/sellin/<sellin>")
     api.add_resource(ItemsByQuality, "/item/quality/<quality>")
 
-
     return app
+
 
 if __name__ == "__main__":
     app.run(debug=True)

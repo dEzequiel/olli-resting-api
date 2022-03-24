@@ -23,6 +23,7 @@ def test_group_items_by_quality(client, app):
 
     assert response.status_code == 200
 
+
 def test_no_item(client, app):
     with app.app_context():
         init_db()
