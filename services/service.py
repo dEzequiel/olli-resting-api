@@ -24,8 +24,8 @@ class Services:
         return group_items_by_quality(quality)
 
     @staticmethod
-    def post_item(name, sell_in, quality):
-        add_item(None, name, sell_in, quality)
+    def post_item(name, sell_in=10, quality=10):
+        return add_item(name, sell_in, quality)
 
     @staticmethod
     def delete_item(name):
