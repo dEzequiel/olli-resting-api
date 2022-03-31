@@ -26,8 +26,8 @@ def test_post_item(client, app):
         init_db()
         insert_db()
 
-    data = {"name": "Post correcto", "sell_in": 1, "quality": 1}
-    response = client.post("item/identifier/", json=data)
+    data = "post_testing"
+    response = client.post("item/identifier/" + data)
 
     assert response.content_type == "application/json"
     assert response.status_code == 201
