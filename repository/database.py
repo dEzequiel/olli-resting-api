@@ -1,6 +1,7 @@
 import sqlite3
 from flask import g
 
+
 DATABASE = "repository/inventory.db"
 
 

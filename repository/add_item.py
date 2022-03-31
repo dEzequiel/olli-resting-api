@@ -1,7 +1,7 @@
 from repository.database import get_db
 
 
-def add_item(id, name, sell_in, quality):
+def add_item(name, sell_in, quality):
     database = get_db()
 
     item = [

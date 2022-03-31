@@ -1,11 +1,9 @@
 import pytest
-from app import app
 from services.service import Services
-from repository.get_item_by_quality import get_item_by_quality
+from repository.group_items_by_quality import group_items_by_quality
 
 service = Services()
 
-
-def test_get_item_by_quality_from_service():
+def test_get_item_by_quality_from_service(app):
     with app.app_context():
-        assert service.get_item_by_quality(5) == get_item_by_quality(5)
+        assert service.group_items_by_quality(5) == group_items_by_quality(5)

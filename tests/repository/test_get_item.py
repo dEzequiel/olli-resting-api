@@ -1,24 +1,67 @@
 import pytest
-from repository.get_item import get_item
-from app import app
+import json
+from repository.commands import init_db, insert_db
+from repository.inventory_test.database_test import get_item
 
 
-def test_get_one_item():
+def test_unit_get_item():
+
+    assert [{"id": 1, "name": "Aged Brie", "sell_in": 2, "quality": 0}] == get_item(
+        "Aged Brie"
+    )
+    assert {"Calamar": "not found"} == get_item("Calamar")
+
+
+def test_get_one_item(client, app):
+
+    # This test uses production database!
+
     with app.app_context():
-        expected_result = [{"id": 1, "name": "Sulfuras", "sell_in": 1, "quality": 1}]
-        assert expected_result == get_item("Sulfuras")
+        init_db()
+        insert_db()
+
+    # [{"id": 1, "name": "Aged Brie", "sell_in": 2, "quality": 0}]
+
+    response = client.get("/item/identifier/Aged Brie")
+    data = json.loads(response.get_data(as_text=True))
+
+    # This way because data returns a list of dicts. Always
+    # entire program returns a list of dicts
+
+    assert data[0]["id"] == 1
+    assert data[0]["name"] == "Aged Brie"
+    assert data[0]["sell_in"] == 2
+    assert data[0]["quality"] == 0
+
+    assert response.status_code == 200
 
 
-def test_get_multiple_item():
+def test_get_multiple_item(client, app):
+
+    # This test uses production database!
+
     with app.app_context():
-        expected_result = [
-            {"id": 2, "name": "Elixir of the Mongoose", "sell_in": 7, "quality": 5},
-            {"id": 3, "name": "Elixir of the Mongoose", "sell_in": 1, "quality": 1},
-        ]
-        assert expected_result == get_item("Elixir of the Mongoose")
+        init_db()
+        insert_db()
+
+    response = client.get("/item/identifier/Sulfuras, Hand of Ragnaros")
+    data = json.loads(response.get_data(as_text=True))
+
+    assert data[0]["id"] == 4
+    assert data[0]["name"] == "Sulfuras, Hand of Ragnaros"
+    assert data[0]["sell_in"] == 0
+    assert data[0]["quality"] == 80
+
+    assert data[1]["id"] == 5
+    assert data[1]["name"] == "Sulfuras, Hand of Ragnaros"
+    assert data[1]["sell_in"] == -1
+    assert data[1]["quality"] == 80
+
+    assert response.status_code == 200
 
 
-def test_no_item():
-    with app.app_context():
-        expected_result = {"Elixir": "not found"}
-        assert expected_result == get_item("Elixir")
+def test_no_item(client):
+    response = client.get("/item/identifier/Elixir")
+    data = json.loads(response.get_data(as_text=True))
+
+    assert {"Elixir": "not found"} == data

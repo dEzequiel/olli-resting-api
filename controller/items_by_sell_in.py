@@ -5,4 +5,4 @@ from services.service import Services
 
 class ItemsBySellin(Resource):
     def get(self, sellin):
-        return Services.get_item_by_sell_in(sellin), 200
+        return Services.group_items_by_sell_in(sellin), 200

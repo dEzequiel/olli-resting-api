@@ -1,11 +1,9 @@
 import pytest
-from app import app
 from services.service import Services
-from repository.get_item_by_sell_in import get_item_by_sell_in
+from repository.group_items_by_sell_in import group_items_by_sell_in
 
 services = Services()
 
-
-def test_get_item_by_sell_in():
+def test_get_item_by_sell_in(app):
     with app.app_context():
-        assert services.get_item_by_sell_in(1) == get_item_by_sell_in(1)
+        assert services.group_items_by_sell_in(1) == group_items_by_sell_in(1)

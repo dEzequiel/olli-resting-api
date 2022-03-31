@@ -1,9 +1,8 @@
 import sqlite3
 from repository.database import get_db
-from repository.get_all_items import get_all_items
 
 
-def get_item_by_quality(quality):
+def group_items_by_quality(quality):
 
     database = get_db()
     item = [

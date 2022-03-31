@@ -3,6 +3,6 @@ from flask_restful import Resource
 from services.service import Services
 
 
-class Items(Resource):
+class Inventory(Resource):
     def get(self):
-        return Services.get_items(), 200
+        return Services.get_all_items(), 200
